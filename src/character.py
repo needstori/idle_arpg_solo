@@ -26,6 +26,10 @@ class Character:
     def alive(self):
         return self.get_current_health() > 0
 
+    def full_restore(self):
+        self.stats.clear_stat(Stats.CURRENT_HEALTH)
+        self.stats.add_stat(Stats.CURRENT_HEALTH, self.stats.get_stat(Stats.MAXIMUM_HEALTH))
+
     def attack(self, target_character: 'Character'):
         min_damage = self.stats.get_stat(Stats.MIN_DAMAGE)
         max_damage = self.stats.get_stat(Stats.MAX_DAMAGE)

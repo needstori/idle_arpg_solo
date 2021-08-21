@@ -30,17 +30,45 @@
             center: self.parent.center
             text: "Defence: %s" % (str(root.defence))
 
-<IdleArpgUI>:
+<WorldAreaDisplay>:
+    font_size:  30
+    center: self.parent.center
+    text: "%s %d/%d" % (root.areaName, root.defeatedMonsters, root.totalMonsters)
+
+<BattleScreen>:
     player_display: player_display
     monster_display: monster_display
-    padding: 10
-    spacing: 10
-    rows: 2
-    CharacterDisplay:
-        id: player_display
-        center: self.parent.center
-    CharacterDisplay:
-        id: monster_display
-        center: self.parent.center
+    world_area_display: world_area_display
+    GridLayout:
+        padding: 10
+        spacing: 10
+        rows: 3
+        WorldAreaDisplay:
+            id: world_area_display
+            font_size:  30
+            center: self.parent.center
+            size_hint_y: 1
+        CharacterDisplay:
+            id: player_display
+            center: self.parent.center
+            size_hint_y: 5
+        CharacterDisplay:
+            id: monster_display
+            center: self.parent.center
+            size_hint_y: 5
 
-
+<EmbarkScreen>:
+    player_display: player_display
+    start_button: start_button
+    GridLayout:
+        padding: 10
+        spacing: 10
+        rows: 2
+        CharacterDisplay:
+            id: player_display
+            center: self.parent.center
+        Button:
+            id: start_button
+            text: "Start"
+            font_size:  70
+            center: self.parent.center

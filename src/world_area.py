@@ -30,3 +30,6 @@ class WorldArea:
                 dead_monsters += 1
 
         return dead_monsters
+
+    def area_complete(self):
+        return self.get_total_monsters() == self.get_dead_monsters()
