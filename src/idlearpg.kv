@@ -1,0 +1,46 @@
+#:kivy 2.0.0
+
+<CharacterDisplay>:
+    spacing: 5
+    rows: 2
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.7, 0.2, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        font_size:  70
+        center: self.parent.center
+        text: str(root.currentHealth) + "/" + str(root.maxHealth)
+    GridLayout:
+        cols: 2
+        Label:
+            font_size:  70
+            center: self.parent.center
+            text: "Damage: %s-%s" % (str(root.minDamage), str(root.maxDamage))
+        Label:
+            font_size:  70
+            center: self.parent.center
+            text: "Defence: %s" % (str(root.defence))
+
+<IdleArpgUI>:
+    player_display: player_display
+    monster_display: monster_display
+    padding: 10
+    spacing: 10
+    rows: 2
+    CharacterDisplay:
+        id: player_display
+        center: self.parent.center
+    CharacterDisplay:
+        id: monster_display
+        center: self.parent.center
+
+
