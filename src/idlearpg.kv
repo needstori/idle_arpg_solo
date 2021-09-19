@@ -16,17 +16,17 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-        font_size:  70
+        font_size:  self.width/7
         center: self.parent.center
         text: str(root.currentHealth) + "/" + str(root.maxHealth)
     GridLayout:
         cols: 2
         Label:
-            font_size:  70
+            font_size:  self.width/7
             center: self.parent.center
             text: "Damage: %s-%s" % (str(root.minDamage), str(root.maxDamage))
         Label:
-            font_size:  70
+            font_size:  self.width/7
             center: self.parent.center
             text: "Defence: %s" % (str(root.defence))
 
@@ -60,6 +60,7 @@
 <EmbarkScreen>:
     player_display: player_display
     start_button: start_button
+    inventory_button: inventory_button
     GridLayout:
         padding: 10
         spacing: 10
@@ -67,8 +68,104 @@
         CharacterDisplay:
             id: player_display
             center: self.parent.center
-        Button:
-            id: start_button
-            text: "Start"
-            font_size:  70
-            center: self.parent.center
+        GridLayout:
+            padding: 10
+            padding: 10
+            cols: 2
+            Button:
+                id: start_button
+                text: "Start"
+                font_size:  70
+                center: self.parent.center
+            Button:
+                id: inventory_button
+                text: "Storage"
+                font_size:  70
+                center: self.parent.center
+
+<ItemList>:
+    viewclass: 'ItemLabel'
+    RecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+<InventoryScreen>:
+    player_display: player_display
+    player_item: player_item
+    item_list: item_list
+    navigation_embark: navigation_embark
+    equip_button: equip_button
+    GridLayout:
+        padding: 10
+        spacing: 10
+        rows: 3
+        GridLayout:
+            size_hint_y: 1
+            padding: 10
+            spacing: 10
+            cols: 3
+            Button:
+                id: navigation_embark
+                text: "Back to Embark"
+                font_size:  30
+                center: self.parent.center
+        GridLayout:
+            size_hint_y: 2
+            padding: 10
+            spacing: 10
+            cols: 2
+            CharacterDisplay:
+                id: player_display
+                center: self.parent.center
+            GridButton:
+                id: player_item
+                rows: 2
+                padding: 10
+                spacing: 10
+                Label:
+                    text: "Current Item"
+                    font_size:  30
+                    color: 1, 1, 1, 1
+                    center: self.parent.center
+                Label:
+                    text: root.player_item_name
+                    font_size:  30
+                    color: 1, 1, 1, 1
+                    center: self.parent.center
+        GridLayout:
+            padding: 10
+            spacing: 10
+            size_hint_y: 8
+            cols: 2
+            ItemList:
+                canvas.before:
+                    Color:
+                        rgba: 0.2, 0.2, 0.2, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                id: item_list
+                size_hint_x: 3
+            GridLayout:
+                size_hint_x: 1
+                padding: 10
+                spacing: 10
+                rows: 2
+                canvas.before:
+                    Color:
+                        rgba: 0.2, 0.2, 0.2, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    size_hint_y: 8
+                    center: self.parent.center
+                    text: root.current_item_text
+                Button:
+                    id: equip_button
+                    size_hint_y: 1
+                    text: "Equip"
+                    font_size: 20
